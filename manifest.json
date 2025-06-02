@@ -1,6 +1,6 @@
 {
-  "name": "La Mia App",
-  "short_name": "App",
+  "name": "Conway's Game Of Life",
+  "short_name": "Game Of Life",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
