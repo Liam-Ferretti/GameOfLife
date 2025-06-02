@@ -7,7 +7,7 @@ class Cell {
 
     show(i, j) {
         if (this.state === 1) {
-            fill(235, 213, 117); // sabbia
+            fill(255, 0, 0); // sabbia
         } else {
             fill(0);
         }
