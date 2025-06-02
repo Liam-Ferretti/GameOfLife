@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Game of Life</title>
 </head>
+
 <body>
   <div id="start-screen">
     <h1>GAME OF LIFE</h1>
@@ -23,7 +25,7 @@
         <span id="density-value">30</span>
       </div>
     </div>
-    
+
     <div class="patterns">
       <h2>Scegli Pattern</h2>
       <div class="pattern-buttons">
@@ -34,10 +36,10 @@
         <button class="pattern-btn" data-pattern="glider-gun">Cannone</button>
       </div>
     </div>
-    
+
     <button id="start-btn">AVVIA SIMULAZIONE</button>
   </div>
-  
+
   <div id="simulation-screen" style="display:none;">
     <div id="controls">
       <button id="pause-btn">PAUSA</button>
@@ -48,9 +50,10 @@
       <div id="canvas-container"></div>
     </main>
   </div>
-  
+
   <script src="sketch.js"></script>
   <script src="cell.js"></script>
   <script src="patterns.js"></script>
 </body>
+
 </html>

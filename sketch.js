@@ -1,6 +1,3 @@
-let width = 1080;
-let height = 2400;
-
 let size = 10;
 let cols, rows, grid;
 let paused = false;
@@ -49,8 +46,9 @@ function startSimulation(pattern) {
 
     // Create canvas
     const container = document.getElementById('canvas-container');
-    const canvas = createCanvas(container.clientWidth, container.clientHeight);
-    canvas.parent('canvas-container');
+    // Usa le dimensioni REALI del container
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     // Calculate grid dimensions
     cols = floor(width / size);
@@ -145,6 +143,17 @@ function setupEventListeners() {
         grid = null;
     });
 
+    // Dopo gli eventi click
+    document.getElementById('start-btn').addEventListener('touchend', handleStart);
+    document.querySelectorAll('.pattern-btn').forEach(btn => {
+        btn.addEventListener('touchend', handlePattern);
+    });
+
+    // Aggiungi prevenzione dello scroll
+    document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('touchstart', e => e.preventDefault());
+    });
+
     // Sliders
     document.getElementById('cell-size').addEventListener('input', (e) => {
         document.getElementById('cell-size-value').textContent = e.target.value;
@@ -157,9 +166,14 @@ function setupEventListeners() {
     // Window resize
     window.addEventListener('resize', () => {
         if (grid) {
-            resizeCanvas(windowWidth, windowHeight);
-            cols = floor(width / size);
-            rows = floor(height / size);
+            const container = document.getElementById('canvas-container');
+            resizeCanvas(container.clientWidth, container.clientHeight);
+
+            // Calcola nuove dimensioni BASATE sul container
+            const newWidth = container.clientWidth;
+            const newHeight = container.clientHeight;
+            cols = floor(newWidth / size);
+            rows = floor(newHeight / size);
 
             const newGrid = make2DArray(cols, rows);
 
