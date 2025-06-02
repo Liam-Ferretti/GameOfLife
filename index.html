@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/addons/p5.sound.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="manifest" href="manifest.json" />
   <meta charset="utf-8" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Game of Life</title>
 </head>
-
 <body>
-  <main>
-  </main>
+  <div id="start-screen">
+    <h1>GAME OF LIFE</h1>
+    <div class="settings">
+      <h2>Impostazioni Griglia</h2>
+      <div class="input-group">
+        <label for="cell-size">Dimensione Cella:</label>
+        <input type="range" id="cell-size" min="5" max="30" value="10">
+        <span id="cell-size-value">10</span>
+      </div>
+      <div class="input-group">
+        <label for="density">Densità Celle Vive (%):</label>
+        <input type="range" id="density" min="1" max="50" value="30">
+        <span id="density-value">30</span>
+      </div>
+    </div>
+    
+    <div class="patterns">
+      <h2>Scegli Pattern</h2>
+      <div class="pattern-buttons">
+        <button class="pattern-btn" data-pattern="random">Casuale</button>
+        <button class="pattern-btn" data-pattern="glider">Aliante</button>
+        <button class="pattern-btn" data-pattern="spaceship">Astronave</button>
+        <button class="pattern-btn" data-pattern="pulsar">Pulsar</button>
+        <button class="pattern-btn" data-pattern="glider-gun">Cannone</button>
+      </div>
+    </div>
+    
+    <button id="start-btn">AVVIA SIMULAZIONE</button>
+  </div>
+  
+  <div id="simulation-screen" style="display:none;">
+    <div id="controls">
+      <button id="pause-btn">PAUSA</button>
+      <button id="reset-btn">RESET</button>
+      <button id="back-btn">INDIETRO</button>
+    </div>
+    <main>
+      <div id="canvas-container"></div>
+    </main>
+  </div>
+  
   <script src="sketch.js"></script>
   <script src="cell.js"></script>
+  <script src="patterns.js"></script>
 </body>
-
 </html>

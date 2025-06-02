@@ -1,46 +1,41 @@
-
 class Cell {
-    constructor(state, material) {
-        this.state = state;
-        this.material = material;
+    constructor(state) {
+        this.state = state; // 1 for alive, 0 for dead
     }
 
     show(i, j) {
         if (this.state === 1) {
-            fill(255, 255, 255); //WHITE
+            fill(255); // WHITE
         } else {
             fill(0);
         }
         square(i * size, j * size, size);
     }
 
+    countNeighbors(grid, x, y) {
+        let sum = 0;
+        const cols = grid.length;
+        const rows = grid[0].length;
+
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                if (i === 0 && j === 0) continue;
+                
+                const col = (x + i + cols) % cols;
+                const row = (y + j + rows) % rows;
+                sum += grid[col][row].state;
+            }
+        }
+        return sum;
+    }
+
     update(i, j, grid, nextGrid) {
-        let state = this.state;
-
-        if (state === 1) { // sabbia
-            let below = (j + 1 < rows) ? grid[i][j + 1].state : 1;
-            let belowL = (i - 1 >= 0 && j + 1 < rows) ? grid[i - 1][j + 1].state : 1;
-            let belowR = (i + 1 < cols && j + 1 < rows) ? grid[i + 1][j + 1].state : 1;
-
-            if (below === 0) {
-                nextGrid[i][j + 1].state = state;
-                return;
-            }
-            if (belowL === 0 && belowR === 0) {
-                let dir = random([-1, 1]);
-                nextGrid[i + dir][j + 1].state = state;
-                return;
-            }
-            if (belowL === 0) {
-                nextGrid[i - 1][j + 1].state = state;
-                return;
-            }
-            if (belowR === 0) {
-                nextGrid[i + 1][j + 1].state = state;
-                return;
-            }
-
-            nextGrid[i][j].state = state;
+        const neighbors = this.countNeighbors(grid, i, j);
+        
+        if (this.state === 1) {
+            nextGrid[i][j].state = (neighbors === 2 || neighbors === 3) ? 1 : 0;
+        } else {
+            nextGrid[i][j].state = (neighbors === 3) ? 1 : 0;
         }
     }
 }
